@@ -4,16 +4,16 @@ configure_terminal: true
 configure_osx: true
 
 # Set to 'true' to configure the Dock via dockutil.
-configure_dock: false
-dockitems_remove: []
-# - Launchpad
-# - TV
-# - Podcasts
-# - 'App Store'
-dockitems_persist: []
-# - name: "Sublime Text"
-#   path: "/Applications/Sublime Text.app/"
-#   pos: 5
+configure_dock: true
+dockitems_remove:
+- TV
+- Podcasts
+- 'App Store'
+dockitems_persist:
+- name: "Sublime Text"
+  path: "/Applications/Sublime Text.app/"
+  pos: 5
+
 
 configure_sudoers: false
 sudoers_custom_config: ""
@@ -65,17 +65,31 @@ homebrew_taps: []
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - chromedriver
   - docker
-  - dropbox
-  - firefox
-  - google-chrome
-  - handbrake
-  - licecap
-  - sequel-ace
-  - slack
-  - sublime-text
+  - warp
+  - vlc
+  - transmission
+  - visual-studio-code
+  - thebrowsercompany-dia
+  - bitwarden
+  - spotify
+  - kiro
+  - arc
+  - cleanmymac
+  - daisydisk
+  - deepl
+  - github
+  - ghostty
+  - google-drive
+  - middle
+  - raycast
+  - surfshark
+  - tailscale-app
+  - telegram
+  - the-unarchiver
   - transmit
+  - windows-app
+
 
 # See `geerlingguy.mac.mas` role documentation for usage instructions.
 mas_installed_apps: []
@@ -105,22 +119,6 @@ pip_packages: []
 #   version: "0.16.3" # default: N/A
 
 # Set to 'true' to configure Sublime Text.
-configure_sublime: false
-sublime_base_path: "~/Library/Application Support/Sublime Text"
-sublime_config_path: "Packages/User"
-sublime_package_control:
-  - "DocBlockr"
-  - "Dockerfile Syntax Highlighting"
-  - "FileDiffs"
-  - "GitHub Flavored Markdown Preview"
-  - "Jinja2"
-  - "Package Control"
-  - "Pretty JSON"
-  - "SublimeLinter"
-  - "SublimeLinter-contrib-yamllint"
-  - "Theme - Cobalt2"
-  - "TrailingSpaces"
-  - "WordingStatus"
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []

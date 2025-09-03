@@ -16,6 +16,9 @@
     - role: elliotweiser.osx-command-line-tools
     - role: geerlingguy.mac.homebrew
       tags: ['homebrew']
+      vars:
+        homebrew_cask_app_state: latest
+        homebrew_update_cask: true
     - role: geerlingguy.dotfiles
       when: configure_dotfiles
       tags: ['dotfiles']
@@ -41,10 +44,6 @@
 
     - import_tasks: tasks/extra-packages.yml
       tags: ['extra-packages']
-
-    - import_tasks: tasks/sublime-text.yml
-      when: configure_sublime
-      tags: ['sublime-text']
 
     - name: Run post-provision task files in a block.
       tags: ['post']
