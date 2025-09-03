@@ -9,10 +9,44 @@ dockitems_remove:
 - TV
 - Podcasts
 - 'App Store'
+- 'Sublime Text'
 dockitems_persist:
-- name: "Sublime Text"
-  path: "/Applications/Sublime Text.app/"
+- name: "Finder"
+  path: "/System/Library/CoreServices/Finder.app/"
+  pos: 1
+- name: "Launchpad"
+  path: "/System/Applications/Launchpad.app/"
+  pos: 2
+- name: "Dia"
+  path: "/Applications/Dia.app/"
+  pos: 3
+- name: "Messages"
+  path: "/System/Applications/Messages.app/"
+  pos: 4
+- name: "Mail"
+  path: "/System/Applications/Mail.app/"
   pos: 5
+- name: "Calendar"
+  path: "/System/Applications/Calendar.app/"
+  pos: 6
+- name: "Warp"
+  path: "/Applications/Warp.app/"
+  pos: 7
+- name: "Visual Studio Code"
+  path: "/Applications/Visual Studio Code.app/"
+  pos: 8
+- name: "Spotify"
+  path: "/Applications/Spotify.app/"
+  pos: 9
+- name: "System Settings"
+  path: "/System/Applications/System Settings.app/"
+  pos: 10
+dockitems_persist_others:
+- name: "Downloads"
+  path: "~/Downloads"
+  arrange: name
+  displayas: folder
+  showas: stack
 
 
 configure_sudoers: false
