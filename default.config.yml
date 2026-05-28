@@ -29,8 +29,8 @@ dockitems_persist:
 - name: "Calendar"
   path: "/System/Applications/Calendar.app/"
   pos: 6
-- name: "Warp"
-  path: "/Applications/Warp.app/"
+- name: "Ghostty"
+  path: "/Applications/Ghostty.app/"
   pos: 7
 - name: "Visual Studio Code"
   path: "/Applications/Visual Studio Code.app/"
@@ -69,60 +69,110 @@ dotfiles_files:
 
 homebrew_installed_packages:
   # - ansible # Installed via Pip.
+  - aiken-lang/tap/aikup
   - autoconf
+  - anomalyco/tap/opencode
+  - automake
   - bash-completion
+  - bats-core
+  - cloudflared
+  - cmake
+  - cocoapods
+  - dfu-util
+  - docker
+  - dockutil
   - doxygen
+  - fastfetch
+  - fastlane
+  - ffmpeg
+  - fzf
   - gettext
   - gifsicle
   - git
   - gh
   - go
-  - gpg
+  - gitleaks
+  - gnupg
+  - hcloud
   - httpie
+  - infisical/get-cli/infisical
   - iperf
   - libevent
-  - sqlite
+  - libxml2
+  - mactop
+  - mise
+  - mobile-dev-inc/tap/maestro
+  - mole
+  - ncdu
+  - ninja
   - nmap
   - node
   - nvm
+  - openssl@3
+  - pgvector
   - php
+  - pkgconf
   - pngpaste
+  - pnpm
+  - postgresql@16
+  - pv
+  - rclone
   - ssh-copy-id
   - readline
-  - openssl
-  - pv
+  - redis
+  - shellcheck
+  - solana
+  - sqlite
+  - txpipe/tap/tx3up
+  - watchman
   - wget
   - wrk
+  - ykman
+  - yq
+  - zoxide
   - zsh-history-substring-search
 
-homebrew_taps: []
+homebrew_taps:
+  - aiken-lang/tap
+  - anomalyco/tap
+  - infisical/get-cli
+  - mobile-dev-inc/tap
+  - txpipe/tap
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - docker
-  - warp
-  - vlc
-  - transmission
-  - visual-studio-code
-  - thebrowsercompany-dia
-  - bitwarden
-  - spotify
-  - kiro
   - arc
+  - bitwarden
+  - claude-code
   - cleanmymac
   - daisydisk
   - deepl
+  - docker-desktop
+  - flux-markdown
+  - gcloud-cli
   - github
   - ghostty
+  - google-chrome
   - google-drive
+  - linearmouse
   - middle
+  - middleclick
+  - mitmproxy
+  - ngrok
+  - opencode-desktop
+  - orbstack
   - raycast
+  - spotify
   - surfshark
   - tailscale-app
   - telegram
   - the-unarchiver
-  - transmit
+  - thebrowsercompany-dia
+  - transmission
+  - visual-studio-code
+  - vlc
   - windows-app
+  - zulu@17
 
 
 # See `geerlingguy.mac.mas` role documentation for usage instructions.
