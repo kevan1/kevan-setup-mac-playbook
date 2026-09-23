@@ -11,36 +11,30 @@ dockitems_remove:
 - 'App Store'
 - 'Sublime Text'
 dockitems_persist:
-- name: "Finder"
-  path: "/System/Library/CoreServices/Finder.app/"
-  pos: 1
-- name: "Launchpad"
-  path: "/System/Applications/Launchpad.app/"
-  pos: 2
 - name: "Dia"
   path: "/Applications/Dia.app/"
-  pos: 3
+  pos: 1
 - name: "Messages"
   path: "/System/Applications/Messages.app/"
-  pos: 4
+  pos: 2
 - name: "Mail"
   path: "/System/Applications/Mail.app/"
-  pos: 5
+  pos: 3
 - name: "Calendar"
   path: "/System/Applications/Calendar.app/"
+  pos: 4
+- name: "Ghostty"
+  path: "/Applications/Ghostty.app/"
+  pos: 5
+- name: "ChatGPT"
+  path: "/Applications/ChatGPT.app/"
   pos: 6
-- name: "Warp"
-  path: "/Applications/Warp.app/"
-  pos: 7
-- name: "Visual Studio Code"
-  path: "/Applications/Visual Studio Code.app/"
-  pos: 8
 - name: "Spotify"
   path: "/Applications/Spotify.app/"
-  pos: 9
+  pos: 7
 - name: "System Settings"
   path: "/System/Applications/System Settings.app/"
-  pos: 10
+  pos: 8
 dockitems_persist_others:
 - name: "Downloads"
   path: "~/Downloads"
@@ -68,60 +62,62 @@ dotfiles_files:
   - .vimrc
 
 homebrew_installed_packages:
-  # - ansible # Installed via Pip.
-  - autoconf
-  - bash-completion
-  - doxygen
   - gettext
-  - gifsicle
-  - git
   - gh
-  - go
-  - gpg
-  - httpie
-  - iperf
-  - libevent
-  - sqlite
-  - nmap
   - node
-  - nvm
-  - php
-  - pngpaste
-  - ssh-copy-id
   - readline
-  - openssl
-  - pv
-  - wget
-  - wrk
-  - zsh-history-substring-search
+  - sqlite
+  - ansible
+  - bash
+  - bats-core
+  - cloudflared
+  - cocoapods
+  - coreutils
+  - ddrescue
+  - exiftool
+  - flock
+  - git
+  - gitleaks
+  - glab
+  - hcloud
+  - infisical/get-cli/infisical
+  - mobile-dev-inc/tap/maestro
+  - mcp-grafana
+  - mise
+  - mole
+  - anomalyco/tap/opencode
+  - shellcheck
+  - solana
+  - supabase/tap/supabase
+  - tailscale
+  - typst
+  - uv
+  - ykman
+  - yq
+  - zoxide
 
-homebrew_taps: []
+homebrew_taps:
+  - infisical/get-cli
+  - supabase/tap
+  - anomalyco/tap
+  - mobile-dev-inc/tap
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
-  - docker
-  - warp
-  - vlc
-  - transmission
-  - visual-studio-code
-  - thebrowsercompany-dia
   - bitwarden
-  - spotify
-  - kiro
-  - arc
-  - cleanmymac
-  - daisydisk
   - deepl
-  - github
   - ghostty
-  - google-drive
-  - middle
+  - github
+  - opencode-desktop
+  - orbstack
   - raycast
-  - surfshark
-  - tailscale-app
+  - spotify
   - telegram
   - the-unarchiver
+  - thebrowsercompany-dia
+  - transmission
   - transmit
+  - vlc
   - windows-app
 
 
@@ -143,10 +139,10 @@ gem_packages: []
 # - name: bundler
 #   state: present # present/absent/latest, default: present
 #   version: "~> 1.15.1" # default: N/A
-npm_packages: []
-# - name: webpack
-#   state: present # present/absent/latest, default: present
-#   version: "^2.6" # default: N/A
+npm_packages:
+  - name: "@anthropic-ai/claude-code"
+  - name: eas-cli
+  - name: skills
 pip_packages: []
 # - name: mkdocs
 #   state: present # present/absent/latest, default: present

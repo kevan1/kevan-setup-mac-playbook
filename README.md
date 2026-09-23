@@ -94,46 +94,57 @@ Any variable can be overridden in `config.yml`; see the supporting roles' docume
 
 Applications (installed with Homebrew Cask):
 
-  - [ChromeDriver](https://sites.google.com/chromium.org/driver/)
-  - [Docker](https://www.docker.com/)
-  - [Dropbox](https://www.dropbox.com/)
-  - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-  - [Google Chrome](https://www.google.com/chrome/)
-  - [Handbrake](https://handbrake.fr/)
-  - [Homebrew](http://brew.sh/)
-  - [LICEcap](http://www.cockos.com/licecap/)
-  - [nvALT](http://brettterpstra.com/projects/nvalt/)
-  - [Sequel Ace](https://sequel-ace.com) (MySQL client)
-  - [Slack](https://slack.com/)
-  - [Sublime Text](https://www.sublimetext.com/)
-  - [Transmit](https://panic.com/transmit/) (S/FTP client)
+  - [Bitwarden](https://bitwarden.com/)
+  - [DeepL](https://www.deepl.com/)
+  - [Dia](https://www.thebrowser.company/)
+  - [Ghostty](https://ghostty.org/)
+  - [GitHub Desktop](https://desktop.github.com/)
+  - [OpenCode Desktop](https://github.com/anomalyco/opencode)
+  - [OrbStack](https://orbstack.dev/) (Docker replacement)
+  - [Raycast](https://www.raycast.com/)
+  - [Spotify](https://www.spotify.com/)
+  - [Telegram](https://telegram.org/)
+  - [The Unarchiver](https://theunarchiver.com/)
+  - [Transmission](https://transmissionbt.com/)
+  - [Transmit](https://panic.com/transmit/)
+  - [VLC](https://www.videolan.org/vlc/)
+  - [Windows App](https://apps.microsoft.com/detail/9n1f85v9t8bn)
 
 Packages (installed with Homebrew):
 
-  - autoconf
-  - bash-completion
-  - doxygen
+  - ansible
+  - bash
+  - bats-core
+  - cloudflared
+  - cocoapods
+  - coreutils
+  - ddrescue
+  - exiftool
+  - flock
   - gettext
-  - gifsicle
+  - gh (GitHub CLI)
   - git
-  - gh
-  - go
-  - gpg
-  - httpie
-  - iperf
-  - libevent
-  - sqlite
-  - nmap
+  - gitleaks
+  - glab (GitLab CLI)
+  - hcloud
+  - infisical
+  - maestro
+  - mcp-grafana
+  - mise
+  - mole
   - node
-  - nvm
-  - php
-  - ssh-copy-id
+  - opencode
   - readline
-  - openssl
-  - pv
-  - wget
-  - wrk
-  - zsh-history-substring-search
+  - shellcheck
+  - solana
+  - sqlite
+  - supabase
+  - tailscale
+  - typst
+  - uv
+  - ykman
+  - yq
+  - zoxide
 
 My [dotfiles](https://github.com/geerlingguy/dotfiles) are also installed into the current user's home directory, including the `.osx` dotfile for configuring many aspects of macOS for better performance and ease of use. You can disable dotfiles management by setting `configure_dotfiles: no` in your configuration.
 
