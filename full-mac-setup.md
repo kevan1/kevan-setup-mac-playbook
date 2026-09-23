@@ -1,4 +1,4 @@
-# Full Mac Setup Process (for Jeff Geerling)
+# Full Mac Setup Process (for Kevin Anrique)
 
 There are some things in life that just can't be automated... or aren't 100% worth the time :(
 
@@ -10,109 +10,167 @@ Before starting, I completed Apple's mandatory macOS setup wizard (creating a lo
 
   - Install Ansible (following the guide in [README.md](README.md))
   - **Sign in to App Store** (since `mas` can't sign in automatically)
-  - Clone mac-dev-playbook to the Mac: `git clone git@github.com:geerlingguy/mac-dev-playbook.git`
-  - Drop `config.yml` from `~/Dropbox/Apps/Config` to the playbook (copy over the network or using a USB flash drive).
-  - Run the playbook.
-    - If there are errors, you may need to finish up other tasks like installing 'old-fashioned' apps first (since I try to place Photoshop in the Dock and it can't be installed automatically). Then, run the playbook again ;)
+    - Optionally install App Store apps like Xcode, WhatsApp, Apple Configurator, etc.
+    - `mas` CLI can be used in the future, but for now install these manually
+  - Clone kevan-setup-mac-playbook to the Mac: `git clone git@github.com:kevan1/kevan-setup-mac-playbook.git`
+  - Create `config.yml` if you want to override any defaults (optional - see README)
+  - Run the playbook: `ansible-playbook main.yml --ask-become-pass`
+    - If there are errors, troubleshoot and run again
   - Start Synchronization tasks:
     - Open Photos and make sure iCloud sync options are correct
-    - Open Music, make sure computer is authorized, and set Library sync options
-    - Open Dropbox, sign in, and set up sync
-  - Install or complete setup for old-fashioned apps:
-    - Open Creative Cloud, sign in, and install needed apps
-    - Open iStat Menus and configure CPU/Net/Temp Combined view
-    - (If required:)
-      - Install [Elgato Stream Deck](https://www.elgato.com/en/downloads)
-        - Open Livestream profile inside `~/Dropbox/Apps/Config/Stream Deck`
-      - Install [Elgato Key Light Air (Control Center)](https://www.elgato.com/en/downloads)
-      - Install [Autodesk Fusion 360](https://www.autodesk.com)
-      - Install Microsoft Office Home & Student 2019 (https://account.microsoft.com/services/)
-      - Install [Fritzing](https://fritzing.org/download/)
-  - Configure FastMail account:
-    - Log into Fastmail
-    - Go to settings, then Privacy & Security
-    - Create a new app password, and on that page, download the configuration file
-    - Open the downloaded profile, then go to System Preferences, and Device Management
-    - Double-click on the Fastmail profile
-    - Click 'Install...' and install it
-    - Configure which accounts are enabled in the 'Internet Accounts' System Preferences pane
-  - Open Calendar and enable personal Google CalDAV account (you have to manually sign in).
-  - Manually copy `~/Development` folder from another Mac (to save time).
-  - Manual settings to automate someday:
-    - Finder:
-      - Disable click-to-show Desktop: `defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false`
-    - System Preferences:
-      - Accessibility > Display > Reduce transparency
-      - Keyboard > Keyboard Shortcuts... > Modifier Keys... > Caps Lock to Esc
-      - Keyboard > Key repeat rate to 'Fast', Delay until repeat to 'Short'
-      - Privacy & Security > Full Disk Access > enable "Terminal"
-    - Safari:
-      - View > Show Status Bar
-      - Preferences > Advanced > "Show full website address"
-      - Preferences > Advanced > "Show features for web developers"
-      - Install the 'Return YouTube Dislike' Userscript in Userscripts
-    - Dock:
-      - Add jgeerling, Downloads, Applications, and shared "mercury" folders
-  - Final Cut Pro
-    - Install FxFactory and sign in: https://fxfactory.com
-    - Copy contents of `~/Development/youtube/fcpx` into respective directories
-  - These things might be automatable, but I do them manually right now:
-    - Configure Time Machine backup drive
-    - Install Wireguard VPN configurations (if needed)
+    - Sign into Bitwarden and sync
 
-## To Wrap in Post-provision automation
+## Container/Docker Environment
 
-The following tasks have to wait for the initial Dropbox sync to complete before they'll succeed. So ideally I'll stick this all in a post-provision script but somehow flag it not to run on first provision.
+  - **OrbStack** is installed via Homebrew cask instead of Docker Desktop
+  - OrbStack provides Docker CLI, docker-compose, and buildx functionality
+  - No need to install separate `docker`, `docker-buildx`, or `docker-compose` formulae
+  - After first launch, configure OrbStack preferences as needed
 
-```
-# ZSH Aliases.
-ln -s /Users/jgeerling/Dropbox/Apps/Config/.aliases /Users/jgeerling/.aliases
+## VPN and Networking
 
-# Electrum BTC Wallet (open Electrum first).
-ln -s /Users/jgeerling/Dropbox/Apps/Electrum/default_wallet /Users/jgeerling/.electrum/wallets/default_wallet
+  - **Tailscale** is installed via Homebrew formula (not the cask)
+    - Launch Tailscale and sign in with your account
+  - If you need **Cloudflare WARP**, install it manually (not part of automated playbook)
+  - `cloudflared` CLI is installed via Homebrew for tunnel management
 
-# SSH setup.
-ssh-keygen  # and create a default key to set up .ssh folder
-sudo ln -s /Users/jgeerling/Dropbox/Apps/Config/ssh/config ~/.ssh/config
-# TODO - Manually copy any shared SSH keys that are needed.
+## Manual App Installations
 
-# Ansible setup.
-sudo mkdir -p /etc/ansible
-sudo ln -s /Users/jgeerling/Dropbox/Apps/Config/ansible/ansible.cfg /etc/ansible/ansible.cfg
-sudo ln -s /Users/jgeerling/Dropbox/Apps/Config/ansible/hosts /etc/ansible/hosts
-sudo ln -s /Users/jgeerling/Dropbox/VMs/roles /etc/ansible/roles
-mkdir -p /Users/jgeerling/.ansible
-ln -s /Users/jgeerling/Dropbox/Apps/Config/ansible/galaxy_token /Users/jgeerling/.ansible/galaxy_token
-ln -s /Users/jgeerling/Dropbox/Apps/Config/ansible/mm-vault-password.txt /Users/jgeerling/.ansible/mm-vault-password.txt
-ln -s /Users/jgeerling/Dropbox/VMs/ansible_collections /Users/jgeerling/.ansible/collections
+The following apps need to be installed manually (not available or not automated):
 
-# Final Cut Pro setup. (Open Motion first)
-cp -r /Users/jgeerling/Dropbox/Apps/Config/Motion/Motion\ Templates.localized/ /Users/jgeerling/Movies/Motion\ Templates.localized/
-cp -r /Users/jgeerling/Dropbox/Apps/Config/Motion/Text\ Styles/ /Users/jgeerling/Library/Application\ Support/Motion/Library/Text\ Styles.localized/
+### Development Tools
+  - **Cursor** - Primary code editor (install manually from https://cursor.sh)
+  - **ChatGPT** - Desktop app (install manually; required for Dock entry to work)
+  - **Claude** - Anthropic's desktop app (install manually if desired)
+  - **Grok Bot** - Install manually if desired
+  - **Sideloadly** - iOS sideloading tool (install manually if needed)
+  - **Mole** - Documented as desired (brew formula `mole` is installed but check for GUI app)
 
-# Sequel Ace favorites. (Open Sequel Ace first)
-cp /Users/jgeerling/Dropbox/Apps/Config/Sequel\ Ace/Favorites.plist /Users/jgeerling/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
+### Explicitly NOT Part of Playbook
 
-# Font setup.
-cp ~/Dropbox/Apps/Config/Fonts/* ~/Library/Fonts/
+The following were previously in the playbook or exist on your Mac but are intentionally excluded:
 
-# Vim setup.
-mkdir -p ~/.vim/autoload
-mkdir -p ~/.vim/bundle
-cd ~/.vim/autoload
-curl https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim > pathogen.vim
-cd ~/.vim/bundle
-git clone https://github.com/preservim/nerdtree.git
-```
+  - ❌ **Surfshark** - Removed from casks
+  - ❌ **Kiro** - Removed from casks  
+  - ❌ **Google Drive** - Removed from casks
+  - ❌ **Docker Desktop** - Replaced by OrbStack
+  - ❌ **Warp** - Removed from casks (using Ghostty instead)
+  - ❌ **Visual Studio Code** - Removed from casks (using Cursor instead)
+  - ❌ **Arc Browser** - Removed from casks
+  - ❌ **CleanMyMac** - Removed from casks
+  - ❌ **DaisyDisk** - Removed from casks
+  - ❌ **Middle** - Removed from casks
+  - ❌ **Google Chrome** - Not automated (install manually if needed, but not in playbook)
 
-## When formatting old Mac
+## SSH Key Setup
 
-  - Sign out of Adobe Creative Cloud
-  - Sign out of Panic Sync in Transmit
-  - Deauthorize Apple Music in iTunes/Music App
-  - Make sure anything new merged into `~/Dropbox/Apps/Config`:
-    - Fonts from ~/Library/Fonts
-    - Motion Plugins from ~/Movies/Motion
-    - Final Cut Pro Text Styles in ~/Library/Application Support/Motion/Library/Text Styles
-    - Sequel Ace shortcuts from ~/Library/Containers/com.sequel-ace.sequel-ace/Data/Library/Application\ Support/Sequel\ Ace/Data/Favorites.plist
+**IMPORTANT**: Never commit SSH private keys to the repository!
+
+  - Generate new SSH keys or restore from Bitwarden
+  - Example: `ssh-keygen -t ed25519 -C "your_email@example.com"`
+  - Store private keys securely in Bitwarden
+  - Add public keys to GitHub, GitLab, servers, etc.
+  - Configure `~/.ssh/config` for your hosts (do not commit sensitive paths)
+
+## Development Environment Setup
+
+The playbook installs many modern development tools via Homebrew:
+
+### Version Managers
+  - **mise** - Modern runtime version manager (replaces nvm/asdf)
+  - **uv** - Fast Python package installer
+
+### Shell Enhancements
+  - **bash** - Modern Bash shell
+  - **zoxide** - Smarter cd command
+
+### Developer Tools
+  - **ansible** - Automation tool
+  - **gh** - GitHub CLI
+  - **glab** - GitLab CLI
+  - **gitleaks** - Secret scanning
+  - **shellcheck** - Shell script linting
+  - **bats-core** - Bash testing framework
+
+### Platform-Specific Tools
+  - **cocoapods** - iOS dependency manager
+  - **eas-cli** - Expo Application Services (npm global)
+  - **solana** - Solana blockchain tools
+  - **typst** - Modern typesetting system
+
+### Cloud & Infrastructure
+  - **hcloud** - Hetzner Cloud CLI
+  - **cloudflared** - Cloudflare tunnel client
+  - **infisical** - Secret management
+  - **supabase** - Supabase CLI
+
+### Testing & Mobile Development
+  - **maestro** - Mobile UI testing framework
+  - **skills** - npm global package
+
+### Other Utilities
+  - **ddrescue** - Data recovery tool
+  - **exiftool** - Image metadata tool
+  - **flock** - File locking utility
+  - **ykman** - YubiKey manager
+  - **yq** - YAML/XML/TOML processor
+  - **coreutils** - GNU core utilities
+
+## Dock Configuration
+
+The playbook automatically configures your Dock to mirror your current Mac setup:
+
+1. Dia
+2. Messages
+3. Mail
+4. Calendar
+5. Ghostty (terminal)
+6. ChatGPT (must install manually first)
+7. Spotify
+8. System Settings
+
+Downloads folder is configured in the Dock as a stack.
+
+**Note**: ChatGPT must be installed manually before running the playbook for the Dock entry to work properly.
+
+## Terminal and Dotfiles
+
+**Terminal configuration is EXCLUDED from this playbook** per your request.
+
+  - The playbook still references geerlingguy/dotfiles in config (unchanged)
+  - `configure_dotfiles: true` and `configure_terminal: true` remain as-is
+  - If you want different dotfiles behavior, create `config.yml` and override these settings
+
+## Things That Can't Be Automated
+
+  - **App Store sign-in** - Must be done manually
+  - **iCloud sync** - Configure in System Settings
+  - **Bitwarden login** - Sign in and configure vault
+  - **Tailscale authentication** - Sign in after installation
+  - **Time Machine** - Configure backup drive manually
+  - **Browser profiles** - Sign into Chrome/Dia/Safari
+  - **Transmit sync** - Configure Panic Sync if needed
+  - **Raycast** - Configure shortcuts and extensions after first launch
+  - **Font installation** - Custom fonts in ~/Library/Fonts (manual)
+
+## Post-Installation Manual Steps
+
+  - Manual system preferences to configure:
+    - Accessibility > Display > Reduce transparency
+    - Keyboard > Keyboard Shortcuts... > Modifier Keys... > Caps Lock to Esc
+    - Keyboard > Key repeat rate to 'Fast', Delay until repeat to 'Short'
+    - Privacy & Security > Full Disk Access > enable "Ghostty" or your terminal
+  - Finder settings:
+    - Disable click-to-show Desktop: `defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false`
+  - Configure any VPN connections (Tailscale, Wireguard, etc.)
+
+## When Formatting Old Mac
+
+Before wiping your old Mac:
+
+  - Sign out of important apps (App Store, Bitwarden, etc.)
+  - Make sure Bitwarden vault is synced with latest SSH keys
+  - Deauthorize Apple Music
+  - Export any custom configurations not in this playbook
+  - Back up any local-only data
   - Follow Apple's guide [here](https://support.apple.com/en-au/HT212749)
