@@ -4,6 +4,40 @@ There are some things in life that just can't be automated... or aren't 100% wor
 
 This document covers that, at least in terms of setting up a brand new Mac out of the box.
 
+## Important: SSH Keys and Secrets
+
+**SSH private keys are NOT in the dotfiles repository.** After reinstalling macOS:
+
+1. Restore SSH keys from local backup: `~/Documents/kevan-reinstall-backup/ssh/`
+2. Set correct permissions:
+   ```bash
+   chmod 700 ~/.ssh
+   chmod 600 ~/.ssh/id_*
+   chmod 644 ~/.ssh/*.pub
+   ```
+3. **Never commit SSH private keys or API tokens to GitHub**
+4. Manually restore secrets to local environment files (e.g., `~/.config/walter-os/overlay/personal.env`)
+
+## Terminal: Ghostty
+
+This setup uses **Ghostty** as the terminal emulator (not Warp). Install via Homebrew:
+
+```bash
+brew install --cask ghostty
+```
+
+The Ghostty config was empty at collection time. Customize `~/Library/Application Support/com.mitchellh.ghostty/config.ghostty` after installation.
+
+## Login Items
+
+After setup, configure these apps to launch at login (System Settings → General → Login Items):
+
+- **Raycast** - Install via `brew install --cask raycast`, then sign in to sync settings
+- **Bitwarden** - Install via `brew install --cask bitwarden`
+- **Cloudflare WARP** (optional) - Not in playbook casks; install manually if needed
+
+See `dotfiles/docs/login-items.md` for details.
+
 ## Initial configuration of a brand new Mac
 
 Before starting, I completed Apple's mandatory macOS setup wizard (creating a local user account, and optionally signing into my iCloud account). Once on the macOS desktop, I do the following (in order):
@@ -64,10 +98,21 @@ The following were previously in the playbook or exist on your Mac but are inten
 
 ## SSH Key Setup
 
-**IMPORTANT**: Never commit SSH private keys to the repository!
+**IMPORTANT**: SSH private keys are NOT in the dotfiles repository!
 
-  - Generate new SSH keys or restore from Bitwarden
-  - Example: `ssh-keygen -t ed25519 -C "your_email@example.com"`
+After reinstalling macOS, restore from local backup:
+
+```bash
+# Restore from backup: ~/Documents/kevan-reinstall-backup/ssh/
+# DO NOT symlink to cloud storage or commit to GitHub
+cp -r ~/Documents/kevan-reinstall-backup/ssh/* ~/.ssh/
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_*
+chmod 644 ~/.ssh/*.pub
+```
+
+Alternative: Generate new SSH keys or restore from Bitwarden
+  - Example: `ssh-keygen -t ed25519 -C "kevan@kevan.com.ar"`
   - Store private keys securely in Bitwarden
   - Add public keys to GitHub, GitLab, servers, etc.
   - Configure `~/.ssh/config` for your hosts (do not commit sensitive paths)
@@ -135,11 +180,14 @@ Downloads folder is configured in the Dock as a stack.
 
 ## Terminal and Dotfiles
 
-**Terminal configuration is EXCLUDED from this playbook** per your request.
+The playbook is configured to use your personal dotfiles repository:
 
-  - The playbook still references geerlingguy/dotfiles in config (unchanged)
-  - `configure_dotfiles: true` and `configure_terminal: true` remain as-is
-  - If you want different dotfiles behavior, create `config.yml` and override these settings
+  - **Dotfiles repo**: `https://github.com/kevan1/dotfiles`
+  - **Branch**: `main`
+  - Files synced: `.zshrc`, `.zprofile`, `.zshenv`, `.gitconfig`, `.gitignore`, `.inputrc`, `.osx`, `.vimrc`
+  - The dotfiles repo contains sanitized configs (secrets redacted)
+  - See `dotfiles/docs/` for setup notes on Ghostty, Raycast, login items, and macOS defaults
+  - Secrets must be manually restored to local environment files (e.g., `~/.config/walter-os/overlay/personal.env`)
 
 ## Things That Can't Be Automated
 
