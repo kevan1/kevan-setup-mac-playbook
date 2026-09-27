@@ -13,30 +13,33 @@ dockitems_remove:
 - 'App Store'
 - 'Sublime Text'
 dockitems_persist:
+- name: "Apps"
+  path: "/System/Applications/Apps.app/"
+  pos: 1
 - name: "Dia"
   path: "/Applications/Dia.app/"
-  pos: 1
+  pos: 2
 - name: "Messages"
   path: "/System/Applications/Messages.app/"
-  pos: 2
+  pos: 3
 - name: "Mail"
   path: "/System/Applications/Mail.app/"
-  pos: 3
+  pos: 4
 - name: "Calendar"
   path: "/System/Applications/Calendar.app/"
-  pos: 4
+  pos: 5
 - name: "Ghostty"
   path: "/Applications/Ghostty.app/"
-  pos: 5
+  pos: 6
 - name: "ChatGPT"
   path: "/Applications/ChatGPT.app/"
-  pos: 6
+  pos: 7
 - name: "Spotify"
   path: "/Applications/Spotify.app/"
-  pos: 7
+  pos: 8
 - name: "System Settings"
   path: "/System/Applications/System Settings.app/"
-  pos: 8
+  pos: 9
 dockitems_persist_others:
 - name: "Downloads"
   path: "~/Downloads"
@@ -145,6 +148,7 @@ gem_packages: []
 npm_packages:
   - name: "@anthropic-ai/claude-code"
   - name: eas-cli
+  - name: vercel
   - name: skills
 pip_packages: []
 # - name: mkdocs
