@@ -78,6 +78,7 @@ homebrew_installed_packages:
   - ansible
   - bash
   - bats-core
+  - bun
   - cloudflared
   - cocoapods
   - dockutil
