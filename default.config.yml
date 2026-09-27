@@ -5,6 +5,8 @@ configure_osx: true
 
 # Set to 'true' to configure the Dock via dockutil.
 configure_dock: true
+# Remove every Dock item (including macOS defaults) before adding the ones below.
+dock_clear_all: true
 dockitems_remove:
 - TV
 - Podcasts
@@ -75,6 +77,7 @@ homebrew_installed_packages:
   - bats-core
   - cloudflared
   - cocoapods
+  - dockutil
   - coreutils
   - ddrescue
   - exiftool
@@ -83,15 +86,11 @@ homebrew_installed_packages:
   - gitleaks
   - glab
   - hcloud
-  - infisical/get-cli/infisical
-  - mobile-dev-inc/tap/maestro
   - mcp-grafana
   - mise
   - mole
-  - anomalyco/tap/opencode
   - shellcheck
   - solana
-  - supabase/tap/supabase
   - tailscale
   - typst
   - uv
@@ -99,15 +98,16 @@ homebrew_installed_packages:
   - yq
   - zoxide
 
-homebrew_taps:
-  - infisical/get-cli
-  - supabase/tap
-  - anomalyco/tap
-  - mobile-dev-inc/tap
+homebrew_taps: []
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
   - bitwarden
+  - chatgpt
+  - claude
+  - codex
+  - codex-app
+  - cursor
   - deepl
   - ghostty
   - github
@@ -129,7 +129,7 @@ mas_installed_apps: []
 mas_email: ""
 mas_password: ""
 
-osx_script: "~/.osx --no-restart"
+osx_script: "/bin/bash {{ lookup('env', 'HOME') }}/.osx --no-restart"
 
 # Install packages from other package managers.
 # Note: You are responsible for making sure the required package managers are
