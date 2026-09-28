@@ -85,6 +85,7 @@ homebrew_installed_packages:
   - coreutils
   - ddrescue
   - exiftool
+  - eza
   - flock
   - git
   - gitleaks
