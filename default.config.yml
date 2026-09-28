@@ -93,9 +93,6 @@ homebrew_installed_packages:
   - mcp-grafana
   - mise
   - mole
-  - pgvector
-  - postgresql@16
-  - redis
   - shellcheck
   - solana
   - starship
